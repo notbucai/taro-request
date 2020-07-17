@@ -4,35 +4,35 @@ import _deepMerge from 'deepmerge';
 
 
 
-export const bind = function(fn,thisArg){
-    return function warp(){
-       return fn.apply(thisArg , Array.from(arguments) )
+export const bind = function (fn, thisArg) {
+    return function warp () {
+        return fn.apply(thisArg, Array.from(arguments))
     }
 }
 
-export const extend = function (a,b, thisArg) {
-    let o = Object.getOwnPropertyNames( b );
+export const extend = function (a, b, thisArg) {
+    let o = Object.getOwnPropertyNames(b);
     o.forEach(attr => {
-        if(thisArg && typeof b[attr] === "function" ){
-            a[attr] = bind( b[attr] , thisArg )
-        }else{
+        if (thisArg && typeof b[attr] === "function") {
+            a[attr] = bind(b[attr], thisArg)
+        } else {
             a[attr] = b[attr];
         }
     });
     return a;
 }
 
-export const copyobj = function( a, b ){
-    return Object.assign( {} , a ,b );
+export const copyobj = function (a, b) {
+    return Object.assign({}, a, b);
 }
 
 // ps: 这里可能也有问题
-export const merge = function(){
+export const merge = function () {
     var result = {};
-    Array.from(arguments).forEach( e =>{
-        for(let key in e){
-            if( typeof e[key] === 'object' && !isEmptyObject(e[key]) ){
-                merge( result[key] , e[key] )
+    Array.from(arguments).forEach(e => {
+        for (let key in e) {
+            if (typeof e[key] === 'object' && !isEmptyObject(e[key])) {
+                merge(result[key], e[key])
             }
             result[key] = e[key]
         }
@@ -47,7 +47,7 @@ export const deepMerge = function () {
 }
 
 
-export const isEmptyObject = function(obj){
+export const isEmptyObject = function (obj) {
     return Object.getOwnPropertyNames(obj).length === 0
 }
 
@@ -55,13 +55,13 @@ export const isEmptyObject = function(obj){
 
 export const combineURLs = function (baseURL, relativeURL) {
     return relativeURL
-      ? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '')
-      : baseURL;
+        ? baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '')
+        : baseURL;
 };
 
 
 
-function encode(val) {
+function encode (val) {
     return encodeURIComponent(val).
         replace(/%40/gi, '@').
         replace(/%3A/gi, ':').
@@ -71,13 +71,13 @@ function encode(val) {
         replace(/%5B/gi, '[').
         replace(/%5D/gi, ']');
 }
-export const buildURL = function ( url , paramsObject ){
-    if( !paramsObject || isEmptyObject(paramsObject) ) return url;
+export const buildURL = function (url, paramsObject) {
+    if (!paramsObject || isEmptyObject(paramsObject)) return url;
     let parts = [];
-    Object.keys( paramsObject ).forEach(key =>{
-        parts.push( encode(key) + '=' + encode( paramsObject[key] ) );
+    Object.keys(paramsObject).forEach(key => {
+        parts.push(encode(key) + '=' + encode(paramsObject[key]));
     });
-    return url += ( url.indexOf('?') === -1 ? '?' : '&' ) + parts.join('&');
+    return url += (url.indexOf('?') === -1 ? '?' : '&') + parts.join('&');
 }
 
 
@@ -88,9 +88,14 @@ export const buildURL = function ( url , paramsObject ){
  * @returns {boolean} True if the specified URL is absolute, otherwise false
  */
 
-export const isAbsoluteURL =  function (url) {
+export const isAbsoluteURL = function (url) {
     // A URL is considered absolute if it begins with "<scheme>://" or "//" (protocol-relative URL).
     // RFC 3986 defines scheme name as a sequence of characters beginning with a letter and followed
     // by any combination of letters, digits, plus, period, or hyphen.
     return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
 };
+
+// export const getTaro = () => {
+//     const Taro = require('@tarojs/taro');
+//     return Taro && (Taro).default || Taro
+// }

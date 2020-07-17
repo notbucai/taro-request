@@ -1,18 +1,18 @@
 
 
 import * as util from '../helpers/util';
+// const Taro = util.getTaro();
 import Taro from '@tarojs/taro';
 
 export const dispatchRequest = function (config) {
-
     if (config.baseURL && !util.isAbsoluteURL(config.url)) {
         config.url = util.combineURLs(config.baseURL, config.url);
     }
-    
-    config.url = util.buildURL( config.url , config.params );
+
+    config.url = util.buildURL(config.url, config.params);
 
     config.data = util.merge(
-        config.data , 
+        config.data,
         config.transformRequest(config.data)
     );
 
@@ -27,38 +27,39 @@ export const dispatchRequest = function (config) {
         delete config.headers[method];
     });
 
-    let promise = Promise.resolve( config );
-    promise = promise.then( config => {
-       return new Promise(function(resolve, reject) {
-            let requestTask =  Taro.request({
-                url : config.url ,
-                data : config.data || {},
-                header : config.headers,
-                method : config.method,
-                dataType : config.dataType,
-                success : function (res) {
+    let promise = Promise.resolve(config);
+    promise = promise.then(config => {
+        console.log('config',config);
+        return new Promise(function (resolve, reject) {
+            let requestTask = Taro.request({
+                url: config.url,
+                data: config.data || {},
+                header: config.headers,
+                method: config.method,
+                dataType: config.dataType,
+                success: function (res) {
                     resolve({
-                        data : res.data ,
-                        headers : res.header,
-                        status : res.statusCode,
-                        statusText : 'ok'
+                        data: res.data,
+                        headers: res.header,
+                        status: res.statusCode,
+                        statusText: 'ok'
                     })
                 },
-                fail : function (err) {
+                fail: function (err) {
                     reject(err)
                 },
-                complete :  function () {
+                complete: function () {
                     config.complete && config.complete()
                 }
             })
 
-            if( config.timeout && typeof config.timeout === 'number' && config.timeout > 1000 ){
-                setTimeout(() =>{
+            if (config.timeout && typeof config.timeout === 'number' && config.timeout > 1000) {
+                setTimeout(() => {
                     requestTask.abort();
                     resolve({
-                        status : 'canceled'
+                        status: 'canceled'
                     });
-                },config.timeout)
+                }, config.timeout)
             }
         });
     })
