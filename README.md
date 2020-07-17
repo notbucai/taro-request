@@ -123,7 +123,7 @@ taroRequest.defaults.headers.post['Content-Type'] = 'application/x-www-form-urle
 
 ## 致谢 && 参考
 * [axios](https://github.com/axios/axios)
-* [wechat-request](https://github.com/hatedMe/wechat-request)
+* [wechat-request](https://github.com/notbucai/taro-request)
 
 
 ## License

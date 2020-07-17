@@ -16,10 +16,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/hatedMe/wechat-request.git"
+    "url": "https://github.com/notbucai/taro-request.git"
   },
   "bugs": {
-    "url": "https://github.com/hatedMe/wechat-request/issues"
+    "url": "https://github.com/notbucai/taro-request/issues"
   },
   "license": "ISC",
   "author": "不才 <1450941858@qq.com>",

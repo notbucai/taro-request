@@ -1,7 +1,7 @@
 /*!
  * 
  * 			author : 1450941858@qq.com
- * 			github : https://github.com/hatedMe/wechat-request
+ * 			github : https://github.com/notbucai/taro-request
  * 			version : 2.2.0
  * 		
  */
