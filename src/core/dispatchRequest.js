@@ -29,7 +29,6 @@ export const dispatchRequest = function (config) {
 
     let promise = Promise.resolve(config);
     promise = promise.then(config => {
-        console.log('config',config);
         return new Promise(function (resolve, reject) {
             let requestTask = Taro.request({
                 url: config.url,
