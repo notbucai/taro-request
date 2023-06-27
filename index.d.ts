@@ -6,12 +6,13 @@ export interface RequestPromise<T = any> extends Promise<Response<T>> {
 
 }
 
-export interface RequestConfig {
+export interface RequestConfig<T = any> {
     url?: string;
     method?: Method;
     baseURL?: string;
     headers?: BaseData;
     params?: BaseData;
+    data?: T;
     timeout?: number;
 }
 
