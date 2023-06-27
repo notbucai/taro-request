@@ -1,6 +1,6 @@
 {
   "name": "@bucai/taro-request",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "基于Promise Taro http请求，轻便，小巧，api友好，功能丰富",
   "main": "index.js",
   "scripts": {
